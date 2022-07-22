@@ -14,16 +14,13 @@ async fn main() -> anyhow::Result<()> {
     // get a tweet
     let tweet = twitter_client
         .get_tweet(20)
-        .tweet_fields([
-            TweetField::AuthorId,
-            TweetField::Text,
-        ])
+        .tweet_fields([TweetField::AuthorId, TweetField::Text])
         .send()
         .await
         .map_err(|e| anyhow::Error::new(e))?
         .into_data()
         .ok_or_else(|| anyhow::Error::msg("No tweet data found"))?;
-    let tweet_text= tweet.text;
+    let tweet_text = tweet.text;
     let tweet_author_id = tweet.author_id.unwrap();
     println!("Author id: {tweet_author_id}");
     println!("Tweet: {tweet_text}");
