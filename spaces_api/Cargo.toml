@@ -7,8 +7,9 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.58"
-egg-mode = "0.16.0"
+dotenv = "0.15.0"
 reqwest = { version = "0.11.11", features = ["json"] }
 serde = {version="1", default-features = false, features=["derive"]}
 serde_json = "1"
 tokio = { version = "1", features = ["rt", "rt-multi-thread", "macros"] }
+twitter-v2 = "0.1.6"
