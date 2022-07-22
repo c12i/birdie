@@ -53,8 +53,6 @@ async fn callback(
 
 #[derive(Deserialize)]
 struct QueryParams {
-    #[allow(unused)]
-    pub state: String,
     pub code: String,
 }
 
