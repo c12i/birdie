@@ -1,6 +1,6 @@
 use std::env;
 
-use twitter_v2::{authorization::Oauth1aToken,TwitterApi};
+use twitter_v2::{authorization::Oauth1aToken, TwitterApi};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
