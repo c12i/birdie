@@ -9,7 +9,7 @@ use twitter_v2::oauth2::{AuthorizationCode, PkceCodeChallenge, PkceCodeVerifier}
 use url::Url;
 
 static CALLBACK_URI: &'static str = "http://127.0.0.1:8080/callback";
-static PKCE_CODE_VERIFIER: &'static str = "this-is-the-verifier-string";
+static PKCE_CODE_VERIFIER: &'static str = "this-is-the-verifier-string-that-is-absolutely-long-and-super-secure";
 
 #[get("/auth")]
 async fn auth(twitter_oauth2_client: web::Data<Oauth2Client>) -> HttpResponse {
