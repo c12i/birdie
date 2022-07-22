@@ -26,8 +26,8 @@ async fn auth(twitter_oauth2_client: web::Data<Oauth2Client>) -> HttpResponse {
     let pkce_code_verifier = PkceCodeVerifier::new(PKCE_CODE_VERIFIER.to_string());
     let pkce_code_challenge = PkceCodeChallenge::from_code_verifier_sha256(&pkce_code_verifier);
     let (auth_url, _) = twitter_oauth2_client.auth_url(pkce_code_challenge, scopes);
+    let auth_url = auth_url.as_str();
     log::info!("Twitter OAuth2 URL: {auth_url}");
-    let auth_url = auth_url.to_string();
     // redirect user to auth url
     HttpResponse::SeeOther()
         .insert_header((LOCATION, auth_url))
@@ -45,8 +45,10 @@ async fn callback(
         .request_token(authorization_code, code_verifier)
         .await
         .unwrap();
-    // for demo purposed
-    HttpResponse::Ok().body(format!("Bearer {}", oauth2_token.access_token().secret()))
+    // do something with the token i.e securely store them in a database for future reqests
+    let _access_token = oauth2_token.access_token().secret();
+    let _refresh_token = oauth2_token.refresh_token().unwrap().secret();
+    HttpResponse::Ok().body("Success!")
 }
 
 #[derive(Deserialize)]
