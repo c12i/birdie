@@ -57,11 +57,6 @@ struct QueryParams {
     pub code: String,
 }
 
-#[get("/healthz")]
-async fn healthz() -> HttpResponse {
-    HttpResponse::Ok().body("All good!")
-}
-
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
@@ -77,7 +72,6 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(auth)
             .service(callback)
-            .service(healthz)
             .app_data(web::Data::new(twitter_oauth2_client.clone()))
             .wrap(Logger::default())
             .wrap(Logger::new("%a %{User-Agent}i"))

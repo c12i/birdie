@@ -24,8 +24,8 @@ async fn main() -> anyhow::Result<()> {
         .text("This is a random tweet".to_string())
         .send()
         .await
-        .unwrap()
+        .map_err(|e| anyhow::Error::new(e))?
         .data()
-        .unwrap();
+        .ok_or_else(|| anyhow::Error::msg("No tweet data found"))?;
     Ok(())
 }

@@ -251,6 +251,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "auth"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "anyhow",
+ "base64",
+ "dotenv",
+ "env_logger",
+ "log",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "twitter-v2",
+ "url",
+ "urlencoding",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1098,25 +1117,6 @@ dependencies = [
  "sha2",
  "thiserror",
  "url",
-]
-
-[[package]]
-name = "oauth2_server"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "anyhow",
- "base64",
- "dotenv",
- "env_logger",
- "log",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
- "twitter-v2",
- "url",
- "urlencoding",
 ]
 
 [[package]]
