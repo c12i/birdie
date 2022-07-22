@@ -1,2 +1,2 @@
 [workspace]
-members = ["auth", "bookmarks_api", "lists_api", "tweet_api", "spaces_api"]
+members = ["auth", "bookmarks_api", "lists_api", "oauth2_server", "tweet_api", "spaces_api"]
