@@ -5,12 +5,14 @@ mod tweet_api;
 
 #[allow(unused)]
 use tweet_api::{
-    delete_tweet, like_or_unlike_tweet, post_tweet, post_retweet,
+    TweetApi,
     TweetLikeAction::{Like, UnLike},
 };
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenv::dotenv().ok();
+    let api = TweetApi::new().await?;
+    let _tweet = api.post_tweet("@collinsmuriuki".to_string(), None).await?;
     Ok(())
 }
