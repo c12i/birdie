@@ -1,15 +1,18 @@
-mod bookmarks_api;
 mod lists_api;
 mod spaces_api;
 mod tweet_api;
 
-use lists_api::ListsApi;
+use spaces_api::SpacesApi;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenv::dotenv().ok();
-    let api = ListsApi::new().await?;
-    api.post_public_list("test list".to_string(), "testing".to_string())
-        .await?;
+
+    let api = SpacesApi::new().await?;
+
+    let space = api.get_space("1zqKVXPQhvZJB".to_string()).await?;
+
+    println!("{}", space.id);
+
     Ok(())
 }
