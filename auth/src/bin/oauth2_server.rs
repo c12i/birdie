@@ -1,4 +1,5 @@
 use std::env;
+use std::fmt::format;
 use std::sync::Mutex;
 
 use actix_web::http::header::LOCATION;
@@ -29,11 +30,11 @@ async fn auth(
     let scopes = [
         Scope::TweetRead,
         Scope::TweetWrite,
-        Scope::ListRead,
-        Scope::ListWrite,
         Scope::SpaceRead,
         Scope::OfflineAccess,
         Scope::UsersRead,
+        Scope::BookmarkWrite,
+        Scope::BookmarkRead
     ];
     // generate auth url
     let (challenge, verifier) = PkceCodeChallenge::new_random_sha256();
@@ -79,8 +80,9 @@ async fn callback(
     HttpResponse::Ok().body("Success!")
 }
 
-#[get("/action")]
-async fn action(
+#[get("/bookmark-tweet/{tweet_id}")]
+async fn bookmark_tweet(
+    tweet_id: web::Path<(u64,)>,
     app_context: web::Data<AppContext>,
 ) -> HttpResponse {
     let ouath_token = app_context
@@ -91,8 +93,10 @@ async fn action(
         .unwrap()
         .to_owned();
     let api = TwitterApi::new(ouath_token);
-    api.post_tweet().text("foo".to_string()).send().await.unwrap();
-    HttpResponse::Ok().finish()
+    let me = api.get_users_me().send().await.unwrap().into_data().unwrap();
+    let tweet_id = tweet_id.into_inner().0;
+    api.post_user_bookmark(me.id, tweet_id).await.unwrap();
+    HttpResponse::Ok().body(format!("tweet {tweet_id} has been bookmarked"))
 }
 
 #[derive(Deserialize)]
@@ -122,7 +126,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(auth)
             .service(callback)
-            .service(action)
+            .service(bookmark_tweet)
             .app_data(web::Data::new(twitter_oauth2_client.clone()))
             .app_data(app_context.clone())
             .wrap(Logger::default())
