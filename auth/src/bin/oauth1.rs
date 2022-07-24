@@ -21,7 +21,7 @@ async fn main() -> anyhow::Result<()> {
     // let's do something with the token i.e post a tweet
     let _tweet = twitter_api_client
         .post_tweet()
-        .text("just setting up my twittr".to_string())
+        .text("#buildwhatsnext".to_string())
         .send()
         .await
         .map_err(|e| anyhow::Error::new(e))?

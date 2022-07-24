@@ -1,5 +1,4 @@
 use std::env;
-use std::fmt::format;
 use std::sync::Mutex;
 
 use actix_web::http::header::LOCATION;
@@ -7,8 +6,7 @@ use actix_web::middleware::Logger;
 use actix_web::{get, web, App, HttpResponse, HttpServer};
 use serde::Deserialize;
 use twitter_v2::authorization::{Oauth2Client, Oauth2Token, Scope};
-use twitter_v2::oauth2::{AuthorizationCode, CsrfToken, PkceCodeChallenge, PkceCodeVerifier};
-use twitter_v2::query::{SpaceField, UserField};
+use twitter_v2::oauth2::{AuthorizationCode, PkceCodeChallenge, PkceCodeVerifier};
 use twitter_v2::TwitterApi;
 use url::Url;
 
