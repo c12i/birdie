@@ -42,9 +42,9 @@ This repository is a cargo workspace organized into two projects
 - [twitter_api](./twitter_api/)
 
 ### auth
-- Here we have code related to authentication to the twitter api to generate access tokens via oauth2.0. There is also a binary containing a code example showing how you can use your [bearer token]('./auth/src/bin/bearer_token.rs') to interact with the API
-- In [`./auth/src/bin/oauth2_server.rs`]('./auth/src/bin/oauth2_server.rs') you'll find a web server that demonstrates how you can create an authentication url and handle the twitter callback request.
-- The `auth` project also exposes a library [`birdie_auth`]('./auth/src/lib.rs') which contains a single `generate_oath1_token` function that does as the name suggests, generates an oauth1 token: this function is reused in the [`twitter_api`]('./twitter_api') project to prevent code repetition
+- Here we have code related to authentication to the twitter api to generate access tokens via oauth2.0. There is also a binary containing a code example showing how you can use your [bearer token](./auth/src/bin/bearer_token.rs) to interact with the API
+- In [`./auth/src/bin/oauth2_server.rs`](./auth/src/bin/oauth2_server.rs) you'll find a web server that demonstrates how you can create an authentication url and handle the twitter callback request.
+- The `auth` project also exposes a library [`birdie_auth`](./auth/src/lib.rs) which contains a single `generate_oath1_token` function that does as the name suggests, generates an oauth1 token: this function is reused in the [`twitter_api`](./twitter_api) project to prevent code repetition
 - How to run
 
 ```sh
@@ -57,8 +57,8 @@ cargo run --bin oath2_server
 ```
 
 ### twitter_api
-- This project contains 3 submodules that contains abstractions over the [`lists_api`]('./twitter_api/src/lists_api.rs') and [`tweet_api`]('./twitter_api/src/tweet_api.rs')
-- We only have a single binary in [`main.rs`]('./twitter_api/src/main.rs') where we'll be running out examples
+- This project contains 3 submodules that contains abstractions over the [`lists_api`](./twitter_api/src/lists_api.rs) and [`tweet_api`](./twitter_api/src/tweet_api.rs)
+- We only have a single binary in [`main.rs`](./twitter_api/src/main.rs) where we'll be running out examples
 
 ```sh
 cargo run --bin twitter_api 
